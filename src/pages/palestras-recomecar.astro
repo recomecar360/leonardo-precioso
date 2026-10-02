@@ -1,0 +1,164 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { buildWhatsApp } from '../data/site';
+
+const conselheiros = (await getCollection('conselheiros')).map((c) => c.data);
+const temas = (await getCollection('recomecarTemas')).map((t) => t.data);
+const pacotes = (await getCollection('recomecarPacotes')).map((p) => p.data);
+const beneficios = (await getCollection('recomecarBeneficios')).map((b) => b.data);
+const passos = (await getCollection('recomecarPassos')).map((s) => s.data);
+const impacto = (await getCollection('recomecarImpacto')).map((i) => i.data);
+
+const ctaNumber = '5511961485763';
+const ctaMessage = 'Olá, gostaria de contratar uma palestra/mentoria através do Instituto Recomeçar.';
+const ctaLink = `https://wa.me/${ctaNumber}?text=${encodeURIComponent(ctaMessage)}`;
+---
+
+<Layout
+  title="Palestras & Mentorias Recomeçar — Inspiração que Transforma"
+  description="Contrate palestras e mentorias com executivos e especialistas. 100% da receita revertida para o Instituto Recomeçar."
+>
+  <section id="hero" class="w-full bg-petroleum-900 py-24">
+    <div class="mx-auto max-w-7xl px-4 text-center">
+      <h1 class="text-4xl font-bold text-white">Palestras & Mentorias Recomeçar</h1>
+      <p class="mt-4 text-lg text-white/90">Inspiração que transforma. 100% revertido para impacto social.</p>
+    </div>
+  </section>
+
+  <main class="mx-auto max-w-7xl px-4 py-16 space-y-20">
+    <!-- O Recomeçar -->
+    <section id="recomecar" aria-labelledby="recomecar-title">
+      <h2 id="recomecar-title" class="text-2xl font-bold text-navy">O Recomeçar</h2>
+      <p class="mt-4 text-[#333]">O Instituto Recomeçar promove formação, reinserção e oportunidades de trabalho para pessoas em situação de vulnerabilidade, conectando conhecimento corporativo com impacto social.</p>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {impacto.map((it) => (
+          <article class="rounded-lg bg-white p-6 text-center shadow">
+            <dt class="text-3xl font-bold text-accent">{it.value}</dt>
+            <dd class="mt-2 text-sm text-[#555]">{it.label}</dd>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Unir conhecimento e impacto -->
+    <section id="modelo" aria-labelledby="modelo-title">
+      <h2 id="modelo-title" class="text-2xl font-bold text-navy">Unir conhecimento e impacto</h2>
+      <p class="mt-4 text-[#333]">Executivos e especialistas doam sua experiência como conselheiros e palestrantes; empresas contratam eventos e mentorias, e todo valor é revertido para os projetos do Instituto Recomeçar.</p>
+    </section>
+
+    <!-- Como funciona (3 itens) -->
+    <section id="como-funciona" aria-labelledby="como-title">
+      <h2 id="como-title" class="text-2xl font-bold text-navy">Como funciona</h2>
+      <ol class="mt-6 space-y-4">
+        <li class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-petroleum-950 font-bold">1</span>
+          <div>
+            <h3 class="font-semibold text-navy">Conselheiros como palestrantes</h3>
+            <p class="text-sm text-[#444]">Especialistas doam seu tempo e conhecimento para eventos e mentorias.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-petroleum-950 font-bold">2</span>
+          <div>
+            <h3 class="font-semibold text-navy">Contratação pela empresa</h3>
+            <p class="text-sm text-[#444]">Escolha tema, palestrante e formato — nós cuidamos do resto.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-petroleum-950 font-bold">3</span>
+          <div>
+            <h3 class="font-semibold text-navy">Valor revertido</h3>
+            <p class="text-sm text-[#444]">100% do valor é destinado aos projetos e programas do Instituto.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Temas -->
+    <section id="temas" aria-labelledby="temas-title">
+      <h2 id="temas-title" class="text-2xl font-bold text-navy">Temas</h2>
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {temas.map((t) => (
+          <div class="rounded-lg border p-4 bg-white">
+            <h3 class="font-semibold text-navy">{t.title}</h3>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Conselheiros -->
+    <section id="conselheiros" aria-labelledby="conselheiros-title">
+      <h2 id="conselheiros-title" class="text-2xl font-bold text-navy">Conselheiros</h2>
+      <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        {conselheiros.map((c) => {
+          const initials = c.name.split(' ').map(s=>s[0]).join('').slice(0,2).toUpperCase();
+          return (
+            <article class="rounded-lg bg-white p-4 text-center">
+              <div class="mx-auto h-16 w-16 rounded-full bg-accent flex items-center justify-center text-navy font-bold text-xl">{initials}</div>
+              <h3 class="mt-3 font-semibold text-navy">{c.name}</h3>
+              <p class="text-sm text-[#555]">{c.role}</p>
+              <p class="mt-2"><a href={c.linkedin} target="_blank" rel="noopener noreferrer" class="text-accent-ink underline">LinkedIn</a></p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Como contratar (passos) -->
+    <section id="contratar" aria-labelledby="contratar-title">
+      <h2 id="contratar-title" class="text-2xl font-bold text-navy">Como contratar</h2>
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        {passos.map((p) => (
+          <div class="rounded-lg bg-white p-4 text-center">
+            <div class="mx-auto h-10 w-10 rounded-full bg-accent flex items-center justify-center font-bold text-petroleum-950">{p.step}</div>
+            <h3 class="mt-3 font-semibold text-navy">{p.title}</h3>
+            {p.detail ? <p class="text-sm text-[#555] mt-2">{p.detail}</p> : null}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Pacotes -->
+    <section id="pacotes" aria-labelledby="pacotes-title">
+      <h2 id="pacotes-title" class="text-2xl font-bold text-navy">Pacotes e investimento</h2>
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {pacotes.map((pkg) => (
+          <article class="rounded-lg bg-white p-6">
+            <h3 class="text-xl font-bold text-navy">{pkg.title}</h3>
+            <p class="text-sm text-[#444]">{pkg.format}</p>
+            <ul class="mt-4 list-disc pl-5 space-y-2 text-sm text-[#333]">
+              {pkg.items.map(i => <li>{i}</li>)}
+            </ul>
+            <div class="mt-4">
+              <div class="text-2xl font-bold text-accent">{pkg.price}</div>
+              <a href={`https://wa.me/5511961485763?text=${encodeURIComponent('Olá, gostaria de contratar uma palestra/mentoria através do Instituto Recomeçar.')}`} target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 rounded-pill bg-accent px-4 py-2 text-sm font-bold text-petroleum-950">Contratar</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section id="beneficios" aria-labelledby="beneficios-title">
+      <h2 id="beneficios-title" class="text-2xl font-bold text-navy">Benefícios para empresas</h2>
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {beneficios.map(b => (
+          <article class="rounded-lg bg-white p-6 text-center">
+            <h3 class="font-semibold text-navy">{b.title}</h3>
+            <p class="text-sm text-[#444] mt-2">{b.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Contato final -->
+    <section id="contato-final" aria-labelledby="contato-final-title">
+      <h2 id="contato-final-title" class="text-2xl font-bold text-navy">Contato</h2>
+      <p class="mt-4 text-[#333]">Para contratar: <a href="https://wa.me/5511961485763" target="_blank" rel="noopener noreferrer" class="text-accent-ink underline">WhatsApp</a> ou <a href="mailto:senna.ricarte@recomecar360.org" class="text-accent-ink underline">senna.ricarte@recomecar360.org</a></p>
+    </section>
+
+  </main>
+
+  </Layout>
+

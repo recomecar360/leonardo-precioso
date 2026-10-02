@@ -15,6 +15,7 @@ export const footerNavLinks = [
 	{ href: '#palestras', label: 'Palestras' },
 	{ href: '#instituto', label: 'Instituto Recomeçar' },
 	{ href: '#midia', label: 'Mídia' },
+	{ href: '/palestras-recomecar', label: 'Palestras Recomeçar' },
 	{ href: '/politica-de-cookies', label: 'Política de Cookies' },
 ] as const;
 
