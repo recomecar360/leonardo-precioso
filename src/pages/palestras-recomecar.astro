@@ -33,10 +33,10 @@ const ctaLink = `https://wa.me/${ctaNumber}?text=${encodeURIComponent(ctaMessage
       <p class="mt-4 text-[#333]">O Instituto Recomeçar promove formação, reinserção e oportunidades de trabalho para pessoas em situação de vulnerabilidade, conectando conhecimento corporativo com impacto social.</p>
       <dl class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
         {impacto.map((it) => (
-          <article class="rounded-lg bg-white p-6 text-center shadow">
+          <div class="rounded-lg bg-white p-6 text-center shadow">
             <dt class="text-3xl font-bold text-accent-ink">{it.value}</dt>
             <dd class="mt-2 text-sm text-[#555]">{it.label}</dd>
-          </article>
+          </div>
         ))}
       </dl>
     </section>
