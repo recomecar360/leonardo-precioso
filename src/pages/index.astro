@@ -13,12 +13,20 @@ import Contato from '../components/Contato.astro';
 import Footer from '../components/Footer.astro';
 import SchemaOrg from '../components/SchemaOrg.astro';
 import heroImage from '../assets/images/leonardo-hero.png';
+import { getImage } from 'astro:assets';
+
+const ogImage = await getImage({
+  src: heroImage,
+  width: 682,
+  height: 357,
+  format: 'webp',
+});
 ---
 
 <Layout
 	title="Leonardo Precioso — Palestras sobre Liderança e Gestão"
 	description="Palestras sobre liderança, gestão humanizada e empreendedorismo social. Transforme sua equipe com histórias reais de superação e resiliência."
-	image={{ src: heroImage, width: 1200, height: 630, alt: 'Leonardo Precioso — Palestras sobre Liderança e Gestão' }}
+	image={{ src: ogImage.src, width: 682, height: 357, alt: 'Leonardo Precioso — Palestras sobre Liderança e Gestão' }}
 >
 	<Header />
 	<SchemaOrg />
