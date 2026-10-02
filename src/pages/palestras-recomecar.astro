@@ -28,27 +28,27 @@ const ctaLink = `https://wa.me/${ctaNumber}?text=${encodeURIComponent(ctaMessage
 
   <main class="mx-auto max-w-7xl px-4 py-16 space-y-20">
     <!-- O Recomeçar -->
-    <section id="recomecar" aria-labelledby="recomecar-title">
+    <section id="recomecar" class="bg-white" aria-labelledby="recomecar-title">
       <h2 id="recomecar-title" class="text-2xl font-bold text-navy">O Recomeçar</h2>
       <p class="mt-4 text-[#333]">O Instituto Recomeçar promove formação, reinserção e oportunidades de trabalho para pessoas em situação de vulnerabilidade, conectando conhecimento corporativo com impacto social.</p>
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <dl class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
         {impacto.map((it) => (
           <article class="rounded-lg bg-white p-6 text-center shadow">
             <dt class="text-3xl font-bold text-accent-ink">{it.value}</dt>
             <dd class="mt-2 text-sm text-[#555]">{it.label}</dd>
           </article>
         ))}
-      </div>
+      </dl>
     </section>
 
     <!-- Unir conhecimento e impacto -->
-    <section id="modelo" aria-labelledby="modelo-title">
+    <section id="modelo" class="bg-white" aria-labelledby="modelo-title">
       <h2 id="modelo-title" class="text-2xl font-bold text-navy">Unir conhecimento e impacto</h2>
       <p class="mt-4 text-[#333]">Executivos e especialistas doam sua experiência como conselheiros e palestrantes; empresas contratam eventos e mentorias, e todo valor é revertido para os projetos do Instituto Recomeçar.</p>
     </section>
 
     <!-- Como funciona (3 itens) -->
-    <section id="como-funciona" aria-labelledby="como-title">
+    <section id="como-funciona" class="bg-white" aria-labelledby="como-title">
       <h2 id="como-title" class="text-2xl font-bold text-navy">Como funciona</h2>
       <ol class="mt-6 space-y-4">
         <li class="flex items-start gap-4">
@@ -76,7 +76,7 @@ const ctaLink = `https://wa.me/${ctaNumber}?text=${encodeURIComponent(ctaMessage
     </section>
 
     <!-- Temas -->
-    <section id="temas" aria-labelledby="temas-title">
+    <section id="temas" class="bg-white" aria-labelledby="temas-title">
       <h2 id="temas-title" class="text-2xl font-bold text-navy">Temas</h2>
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {temas.map((t) => (
@@ -88,7 +88,7 @@ const ctaLink = `https://wa.me/${ctaNumber}?text=${encodeURIComponent(ctaMessage
     </section>
 
     <!-- Conselheiros -->
-    <section id="conselheiros" aria-labelledby="conselheiros-title">
+    <section id="conselheiros" class="bg-white" aria-labelledby="conselheiros-title">
       <h2 id="conselheiros-title" class="text-2xl font-bold text-navy">Conselheiros</h2>
       <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
         {conselheiros.map((c) => {
@@ -106,7 +106,7 @@ const ctaLink = `https://wa.me/${ctaNumber}?text=${encodeURIComponent(ctaMessage
     </section>
 
     <!-- Como contratar (passos) -->
-    <section id="contratar" aria-labelledby="contratar-title">
+    <section id="contratar" class="bg-white" aria-labelledby="contratar-title">
       <h2 id="contratar-title" class="text-2xl font-bold text-navy">Como contratar</h2>
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {passos.map((p) => (
@@ -120,7 +120,7 @@ const ctaLink = `https://wa.me/${ctaNumber}?text=${encodeURIComponent(ctaMessage
     </section>
 
     <!-- Pacotes -->
-    <section id="pacotes" aria-labelledby="pacotes-title">
+    <section id="pacotes" class="bg-white" aria-labelledby="pacotes-title">
       <h2 id="pacotes-title" class="text-2xl font-bold text-navy">Pacotes e investimento</h2>
       <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         {pacotes.map((pkg) => (
@@ -140,7 +140,7 @@ const ctaLink = `https://wa.me/${ctaNumber}?text=${encodeURIComponent(ctaMessage
     </section>
 
     <!-- Benefícios -->
-    <section id="beneficios" aria-labelledby="beneficios-title">
+    <section id="beneficios" class="bg-white" aria-labelledby="beneficios-title">
       <h2 id="beneficios-title" class="text-2xl font-bold text-navy">Benefícios para empresas</h2>
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
         {beneficios.map(b => (
@@ -153,7 +153,7 @@ const ctaLink = `https://wa.me/${ctaNumber}?text=${encodeURIComponent(ctaMessage
     </section>
 
     <!-- Contato final -->
-    <section id="contato-final" aria-labelledby="contato-final-title">
+    <section id="contato-final" class="bg-white" aria-labelledby="contato-final-title">
       <h2 id="contato-final-title" class="text-2xl font-bold text-navy">Contato</h2>
       <p class="mt-4 text-[#333]">Para contratar: <a href="https://wa.me/5511961485763" target="_blank" rel="noopener noreferrer" class="text-accent-ink underline">WhatsApp</a> ou <a href="mailto:senna.ricarte@recomecar360.org" class="text-accent-ink underline">senna.ricarte@recomecar360.org</a></p>
     </section>
