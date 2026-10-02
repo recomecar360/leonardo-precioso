@@ -3,7 +3,7 @@ import { Picture } from 'astro:assets';
 import institutoImage from '../assets/images/instituto-recomecar.png';
 import { getCollection } from 'astro:content';
 
-const highlight = 'font-bold text-accent';
+const highlight = 'font-bold text-accent-ink';
 const bold = 'font-bold text-navy';
 
 const features = (await getCollection('palestras')).map((p) => p.data).slice(0, 3);

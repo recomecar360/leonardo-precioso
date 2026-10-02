@@ -3,7 +3,7 @@ import { Picture } from 'astro:assets';
 import aboutImage from '../assets/images/leonardo-sobre.png';
 import { getCollection } from 'astro:content';
 
-const highlight = 'font-bold text-accent';
+const highlight = 'font-bold text-accent-ink';
 const bold = 'font-bold text-navy';
 
 const cards = (await getCollection('premios')).map((p) => p.data);

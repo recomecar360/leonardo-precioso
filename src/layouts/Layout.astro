@@ -5,6 +5,8 @@ import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/500.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
+import poppins400 from '@fontsource/poppins/files/poppins-latin-400-normal.woff2?url';
+import poppins700 from '@fontsource/poppins/files/poppins-latin-700-normal.woff2?url';
 import CookieBanner from '../components/CookieBanner.astro';
 
 interface Props {
@@ -28,6 +30,8 @@ const canonical = new URL(Astro.url.pathname, site).toString();
 <html lang="pt-BR" class="scroll-smooth">
 	<head>
 		<meta charset="utf-8" />
+		<link rel="preload" as="font" type="font/woff2" href={poppins400} crossorigin />
+		<link rel="preload" as="font" type="font/woff2" href={poppins700} crossorigin />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />

@@ -16,6 +16,7 @@ export default {
 					DEFAULT: '#F0B323',
 					light: '#FFBE4D',
 					dark: '#E5A620',
+					ink: '#8A5E00',
 				},
 				navy: {
 					DEFAULT: '#003366',
