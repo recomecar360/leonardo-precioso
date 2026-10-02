@@ -1,0 +1,58 @@
+---
+import { faq } from '../data/faq';
+import { socialLinks } from '../data/site';
+import { book } from '../data/book';
+
+const siteUrl = Astro.site ?? 'https://leonardoprecioso.com.br';
+// person info embedded directly in graph below
+
+const graph = [
+	{
+		'@type': 'WebSite',
+		'@id': `${siteUrl}#website`,
+		url: siteUrl,
+		name: 'Leonardo Precioso',
+	},
+	{
+		'@type': 'Person',
+		'@id': `${siteUrl}#person`,
+		name: 'Leonardo Precioso',
+		sameAs: socialLinks.map((s) => s.href),
+	},
+	{
+		'@type': 'Organization',
+		'@id': `${siteUrl}#org`,
+		name: 'Instituto Recomeçar',
+		url: 'https://recomecar360.org',
+	},
+	{
+		'@type': 'Book',
+		'@id': `${siteUrl}#book`,
+		name: book.title,
+		author: book.authors.map((a) => ({ '@type': 'Person', name: a })),
+		url: book.url,
+	},
+	{
+		'@type': 'FAQPage',
+		'@id': `${siteUrl}#faq`,
+		mainEntity: faq.map((q) => ({
+			'@type': 'Question',
+			name: q.question,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: q.answer,
+			},
+		})),
+	},
+];
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': graph,
+};
+---
+
+<script type="application/ld+json" is:inline>
+{JSON.stringify(jsonLd)}
+</script>
+

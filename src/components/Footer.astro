@@ -1,0 +1,163 @@
+---
+import { contactInfo, footerNavLinks, socialLinks, buildWhatsApp } from '../data/site';
+
+const year = new Date().getFullYear();
+
+const footerSocialLinks = socialLinks.filter((s) => s.icon !== 'youtube');
+---
+
+<footer class="w-full bg-petroleum-900" aria-label="Rodapé do site">
+	<div class="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+		<div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+			<!-- Marca -->
+			<div class="sm:col-span-2 lg:col-span-1">
+				<p class="text-lg font-bold tracking-tight sm:text-xl">
+					<span class="text-white">Leonardo </span>
+					<span class="text-accent">Precioso</span>
+				</p>
+				<p class="mt-4 max-w-xs text-sm leading-relaxed text-white/70">
+					Palestrante, empreendedor social e líder transformacional. Inspirando mudanças através de
+					histórias reais de superação.
+				</p>
+			</div>
+
+			<!-- Links úteis -->
+			<div>
+				<h3 class="text-base font-bold text-white">Links Úteis</h3>
+				<nav class="mt-4" aria-label="Links úteis">
+					<ul class="space-y-3">
+						{
+							footerNavLinks.map((link) => (
+								<li>
+									<a
+										href={link.href}
+										class="text-sm text-white/70 no-underline transition-colors hover:text-accent"
+									>
+										{link.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</nav>
+			</div>
+
+			<!-- Contato -->
+			<div>
+				<h3 class="text-base font-bold text-white">Contato</h3>
+				<ul class="mt-4 space-y-3 text-sm text-white/70">
+					<li>
+						WhatsApp:{' '}
+						<a
+							href={buildWhatsApp('Olá, gostaria de mais informações.')}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="text-white/70 no-underline transition-colors hover:text-accent"
+						>
+							{contactInfo.phone}
+						</a>
+					</li>
+					<li>
+						Email:{' '}
+						<a
+							href={`mailto:${contactInfo.footerEmail}`}
+							class="break-all text-white/70 no-underline transition-colors hover:text-accent"
+						>
+							{contactInfo.footerEmail}
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Redes sociais -->
+			<div>
+				<h3 class="text-base font-bold text-white">Redes Sociais</h3>
+				<nav class="mt-4 flex flex-wrap gap-4" aria-label="Redes sociais no rodapé">
+					{
+						footerSocialLinks.map((social) => (
+							<a
+								href={social.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex h-10 w-10 items-center justify-center text-white/80 no-underline transition-colors hover:text-accent"
+								aria-label={social.label}
+							>
+								{social.icon === 'instagram' && (
+									<svg
+										class="h-6 w-6"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.75"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										aria-hidden="true"
+									>
+										<rect x="2" y="2" width="20" height="20" rx="5" />
+										<circle cx="12" cy="12" r="4" />
+										<circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+									</svg>
+								)}
+								{social.icon === 'facebook' && (
+									<svg
+										class="h-6 w-6"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.75"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										aria-hidden="true"
+									>
+										<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+									</svg>
+								)}
+								{social.icon === 'linkedin' && (
+									<svg
+										class="h-6 w-6"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.75"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										aria-hidden="true"
+									>
+										<path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-13h4v2" />
+										<rect x="2" y="9" width="4" height="12" />
+										<circle cx="4" cy="4" r="2" />
+									</svg>
+								)}
+							</a>
+						))
+					}
+				</nav>
+			</div>
+		</div>
+
+		<div
+			class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:mt-14 lg:flex-row lg:items-center"
+		>
+			<p class="text-center text-sm text-white/50 lg:text-left">
+				© {year} Leonardo Precioso. Todos os direitos reservados.
+			</p>
+			<p class="text-center text-sm text-white/50">
+				Criado por <span class="font-medium text-white/70">Decola SEO</span>
+			</p>
+			<p class="flex items-center justify-center gap-1.5 text-center text-sm text-white/50 lg:justify-end">
+				Feito com
+					<svg
+					class="h-4 w-4 text-accent"
+					viewBox="0 0 24 24"
+					fill="currentColor"
+					aria-hidden="true"
+				>
+					<path
+						d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+					></path>
+				</svg>
+				para transformar vidas
+			</p>
+		</div>
+	</div>
+</footer>

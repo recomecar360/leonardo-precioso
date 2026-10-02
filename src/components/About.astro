@@ -1,0 +1,147 @@
+---
+import { Picture } from 'astro:assets';
+import aboutImage from '../assets/images/leonardo-sobre.png';
+import { getCollection } from 'astro:content';
+
+const highlight = 'font-bold text-accent';
+const bold = 'font-bold text-navy';
+
+const cards = (await getCollection('premios')).map((p) => p.data);
+---
+
+<section
+	id="sobre"
+	class="w-full bg-white py-16 sm:py-20 lg:py-28"
+	aria-labelledby="about-title"
+>
+	<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+		<header class="text-center">
+			<h2
+				id="about-title"
+				class="text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.25rem]"
+			>
+				Sobre Leonardo Precioso
+			</h2>
+			<div class="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true"></div>
+		</header>
+
+		<div
+			class="mt-12 grid items-start gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-14 xl:gap-20"
+		>
+			<figure class="order-2 lg:order-1">
+				<div class="overflow-hidden rounded-[2.5rem] shadow-[0_8px_30px_rgb(0_0_0/0.12)]">
+					<Picture
+						src={aboutImage}
+						alt="Leonardo Precioso — empreendedor social e fundador do Instituto Recomeçar"
+						formats={['avif','webp']}
+						widths={[320,480,640]}
+						sizes="(max-width: 768px) 100vw, 50vw"
+						width={640}
+						height={800}
+						class="aspect-[4/5] h-auto w-full object-cover"
+						loading="lazy"
+					/>
+				</div>
+			</figure>
+
+			<div class="order-1 flex flex-col gap-8 lg:order-2 lg:gap-10">
+				<div class="space-y-5 text-[0.9375rem] leading-relaxed text-[#333333] sm:text-base lg:text-[1.0625rem] lg:leading-[1.75]">
+					<p>
+						Aos <span class={highlight}>43 anos</span>, <span class={bold}>Leonardo Precioso</span> é um
+						exemplo vivo de <span class={highlight}>transformação</span> e
+						<span class={highlight}>resiliência</span>. Após cumprir
+						<span class={highlight}>7 anos e 13 dias</span> de prisão a partir de 2008, ele reconstruiu sua
+						vida e tornou-se referência em <span class={bold}>gestão humanizada</span> e
+						<span class={bold}>segunda chance</span>.
+					</p>
+					<p>
+						Leonardo foi o primeiro ex-presidiário a vencer o
+						<span class={highlight}>Prêmio Jovem Brasileiro 2016</span> na categoria Social, reconhecimento
+						que solidificou seu papel como agente de mudança social.
+					</p>
+					<p>
+						Como fundador do <span class={bold}>Instituto Recomeçar</span>, Leonardo dedica-se ao
+						desenvolvimento e preparação de ex-presidiários para o mercado de trabalho, promovendo
+						<span class={highlight}>transformação social</span> e
+						<span class={highlight}>resiliência corporativa</span>.
+					</p>
+				</div>
+
+				<div class="grid gap-4 sm:grid-cols-2 sm:gap-5">
+					{
+						cards.map((card) => (
+							<article class="rounded-lg bg-[#f8f9fa] p-5 sm:p-6">
+								<div class="mb-3 text-accent" aria-hidden="true">
+									{card.icon === 'ribbon' && (
+										<svg
+											class="h-7 w-7"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="1.75"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										>
+											<circle cx="12" cy="8" r="5" />
+											<path d="M8.5 14L7 22h10l-1.5-8" />
+										</svg>
+									)}
+									{card.icon === 'users' && (
+										<svg
+											class="h-7 w-7"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="1.75"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										>
+											<path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+											<circle cx="9" cy="7" r="4" />
+											<path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+										</svg>
+									)}
+									{card.icon === 'chart' && (
+										<svg
+											class="h-7 w-7"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="1.75"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										>
+											<path d="M3 3v18h18" />
+											<path d="M7 14l4-4 4 4 5-6" />
+										</svg>
+									)}
+									{card.icon === 'heart' && (
+										<svg
+											class="h-7 w-7"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="1.75"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										>
+											<path
+												d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+											></path>
+										</svg>
+									)}
+								</div>
+								<h3 class="text-base font-bold leading-snug text-navy sm:text-[1.0625rem]">
+									{card.title}
+								</h3>
+								<p class="mt-1.5 text-sm leading-relaxed text-[#555555]">
+									{card.description}
+								</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,51 @@
+{
+	"storageKey": "leonardo-precioso-cookie-consent",
+	"banner": {
+		"title": "Cookies e privacidade",
+		"message": "Utilizamos cookies essenciais para o funcionamento do site e, com o seu consentimento, cookies para melhorar a sua experiência de navegação. Ao clicar em \"Aceitar\", você concorda com o uso conforme nossa Política de Cookies.",
+		"acceptLabel": "Aceitar",
+		"rejectLabel": "Recusar",
+		"policyLabel": "Política de Cookies",
+		"policyHref": "/politica-de-cookies"
+	},
+	"policy": {
+		"title": "Política de Cookies",
+		"description": "Saiba como o site Leonardo Precioso utiliza cookies e como você pode gerenciar suas preferências.",
+		"lastUpdated": "maio de 2026",
+		"sections": [
+			{
+				"heading": "O que são cookies?",
+				"paragraphs": [
+					"Cookies são pequenos arquivos de texto armazenados no seu navegador quando você visita um site. Eles permitem que o site reconheça seu dispositivo e lembre preferências, como o consentimento que você deu nesta página."
+				]
+			},
+			{
+				"heading": "Como utilizamos cookies",
+				"paragraphs": [
+					"Este site pode utilizar cookies estritamente necessários para garantir o funcionamento básico e a segurança da navegação.",
+					"Com o seu consentimento, podemos utilizar cookies de preferência ou de medição para entender como os visitantes interagem com o conteúdo e melhorar a experiência. Você pode recusar cookies não essenciais a qualquer momento."
+				]
+			},
+			{
+				"heading": "Tipos de cookies",
+				"list": [
+					"Essenciais: necessários para o funcionamento do site (por exemplo, registrar sua escolha neste banner).",
+					"Preferência: lembram configurações que você definiu durante a visita.",
+					"Análise: ajudam a compreender o uso do site de forma agregada, quando ativados com seu consentimento."
+				]
+			},
+			{
+				"heading": "Como gerenciar ou revogar o consentimento",
+				"paragraphs": [
+					"Você pode alterar as configurações do seu navegador para bloquear ou apagar cookies. Para revogar o consentimento dado neste site, limpe os dados de navegação do domínio ou exclua o armazenamento local; ao retornar, o banner de cookies será exibido novamente."
+				]
+			},
+			{
+				"heading": "Contato",
+				"paragraphs": [
+					"Em caso de dúvidas sobre esta política ou sobre o tratamento de dados pessoais, entre em contato pelo e-mail contato@leonardoprecioso.com.br."
+				]
+			}
+		]
+	}
+}

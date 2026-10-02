@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+// Self-host Poppins via fontsource (loaded at build time)
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
+import CookieBanner from '../components/CookieBanner.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	image?: { src: string; width?: number; height?: number; alt?: string };
+	noindex?: boolean;
+}
+
+const { title, description } = Astro.props;
+const { image, noindex } = Astro.props;
+
+const siteName = 'Leonardo Precioso';
+const pageTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
+
+const site = Astro.site ?? 'https://leonardoprecioso.com.br';
+const canonical = new URL(Astro.url.pathname, site).toString();
+---
+
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{pageTitle}</title>
+		<meta name="theme-color" content="#0A1929" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		{noindex ? <meta name="robots" content="noindex, nofollow" /> : null}
+
+		<link rel="canonical" href={canonical} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:locale" content="pt_BR" />
+		<meta property="og:site_name" content={siteName} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@leonardoprecioso" />
+
+		{image ? (
+			<>
+				<link rel="image_src" href={image.src} />
+				<meta property="og:image" content={image.src} />
+				<meta property="og:image:width" content={String(image.width ?? 1200)} />
+				<meta property="og:image:height" content={String(image.height ?? 630)} />
+				<meta property="og:image:alt" content={image.alt ?? 'Leonardo Precioso — Recomeçar'} />
+				<meta name="twitter:image" content={image.src} />
+			</>
+		) : null}
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+
+		<!-- Fonts: self-hosted Poppins (imported via @fontsource-variable/poppins) -->
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+	</head>
+	<body class="min-h-dvh w-full overflow-x-hidden bg-petroleum-900 font-sans text-white antialiased">
+		<div class="relative flex min-h-dvh w-full flex-col">
+			<slot />
+		</div>
+		<CookieBanner />
+	</body>
+</html>

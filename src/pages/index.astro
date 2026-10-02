@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Palestras from '../components/Palestras.astro';
+import Instituto from '../components/Instituto.astro';
+import Midia from '../components/Midia.astro';
+import Livro from '../components/Livro.astro';
+import MencoesMidia from '../components/MencoesMidia.astro';
+import FAQ from '../components/FAQ.astro';
+import Contato from '../components/Contato.astro';
+import Footer from '../components/Footer.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+import heroImage from '../assets/images/leonardo-hero.png';
+---
+
+<Layout
+	title="Leonardo Precioso — Palestras sobre Liderança e Gestão"
+	description="Palestras sobre liderança, gestão humanizada e empreendedorismo social. Transforme sua equipe com histórias reais de superação e resiliência."
+	image={{ src: heroImage, width: 1200, height: 630, alt: 'Leonardo Precioso — Palestras sobre Liderança e Gestão' }}
+>
+	<Header />
+	<SchemaOrg />
+	<Hero />
+	<About />
+	<Palestras />
+	<Instituto />
+	<Midia />
+	<Livro />
+	<MencoesMidia />
+	<FAQ />
+	<Contato />
+	<Footer />
+</Layout>

@@ -1,0 +1,96 @@
+---
+const storyCards = [
+	{
+		title: 'Do Passado ao Propósito',
+		text: 'Cada recomeço é uma oportunidade de reescrever nossa história. Leonardo Precioso viveu essa transformação na pele: de presidiário a empreendedor social premiado, sua jornada é prova viva de que nosso passado não define nosso futuro.',
+	},
+	{
+		title: 'Resiliência em Ação',
+		text: 'A verdadeira resiliência não é sobre nunca cair, mas sobre levantar-se mais forte a cada queda. É sobre transformar adversidades em aprendizados e obstáculos em degraus para o crescimento.',
+	},
+] as const;
+
+const quotes = [
+	'A verdadeira transformação começa quando acreditamos que merecemos uma segunda chance.',
+	'Liderança não é sobre poder, é sobre capacitar pessoas a se tornarem a melhor versão de si mesmas.',
+	'O maior ativo de uma empresa não são seus recursos, mas as pessoas que acreditam em seu propósito.',
+] as const;
+---
+
+<section
+	id="midia"
+	class="w-full bg-petroleum-900 py-16 sm:py-20 lg:py-28"
+	aria-labelledby="midia-title"
+>
+	<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+		<header class="mx-auto max-w-3xl text-center">
+			<h2
+				id="midia-title"
+				class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.25rem]"
+			>
+				A Arte do Recomeço
+			</h2>
+			<div class="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true"></div>
+			<p class="mt-6 text-base leading-relaxed text-white-muted sm:text-lg">
+				Histórias que inspiram transformação pessoal e profissional
+			</p>
+		</header>
+
+		<div class="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-2 lg:gap-8">
+			<!-- Coluna esquerda: cards escuros -->
+			<div class="flex flex-col gap-6">
+				{
+					storyCards.map((card) => (
+						<article class="rounded-2xl bg-petroleum-850 p-6 sm:rounded-3xl sm:p-8">
+							<h3 class="text-lg font-bold text-white sm:text-xl">{card.title}</h3>
+							<p class="mt-4 text-sm leading-relaxed text-white/90 sm:text-base sm:leading-relaxed">
+								{card.text}
+							</p>
+						</article>
+					))
+				}
+			</div>
+
+			<!-- Coluna direita: citações -->
+			<div class="flex flex-col gap-6">
+				{
+					quotes.map((quote) => (
+						<blockquote class="rounded-2xl bg-white p-6 sm:rounded-3xl sm:p-8">
+							<svg
+								class="mb-4 h-8 w-8 text-accent"
+								viewBox="0 0 24 24"
+								fill="currentColor"
+								aria-hidden="true"
+							>
+								<path
+									d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.45l1.344 2.132C7.08 7.524 5.5 9.9 5.5 12.011c0 1.133.445 2.136 1.083 2.321zm12 0C15.553 16.227 15 15 15 13.011c0-3.5 2.457-6.637 6.03-8.45l1.344 2.132C19.08 7.524 17.5 9.9 17.5 12.011c0 1.133.445 2.136 1.083 2.321z"
+								></path>
+							</svg>
+							<p class="text-base italic leading-relaxed text-[#333333] sm:text-lg">
+								"{quote}"
+							</p>
+							<footer class="mt-4 text-sm font-medium text-[#555555]">
+								— Leonardo Precioso
+							</footer>
+						</blockquote>
+					))
+				}
+			</div>
+		</div>
+
+		<!-- Banner inferior -->
+		<article
+			class="mt-8 rounded-2xl bg-petroleum-850 px-6 py-10 text-center sm:mt-10 sm:rounded-3xl sm:px-10 sm:py-12 lg:mt-12"
+		>
+			<h3 class="text-xl font-bold text-white sm:text-2xl">Histórias de Transformação</h3>
+			<p class="mx-auto mt-5 max-w-3xl text-sm leading-relaxed text-white/90 sm:text-base sm:leading-relaxed">
+				Através do Instituto Recomeçar, centenas de pessoas encontraram novas oportunidades e
+				reconstruíram suas vidas. Cada história é um testemunho do poder da segunda chance e do
+				impacto da gestão humanizada.
+			</p>
+			<p class="mt-6 text-sm italic text-white/50">
+				Testemunhos e casos de sucesso em breve...
+			</p>
+		</article>
+	</div>
+</section>
