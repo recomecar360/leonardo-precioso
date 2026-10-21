@@ -31,7 +31,7 @@ export const socialLinks = [
 	},
 	{
 		label: 'LinkedIn',
-		href: 'https://www.linkedin.com/in/leonardo-precioso-recome%C3%A7ar-b1a063157?originalSubdomain=br',
+		href: 'https://www.linkedin.com/in/leonardo-precioso-b1a063157/',
 		icon: 'linkedin',
 	},
 	{
