@@ -1,5 +1,4 @@
 ---
-import { buildWhatsApp } from '../data/site';
 import { getCollection } from 'astro:content';
 
 const palestras = (await getCollection('palestras')).map((p) => p.data);
@@ -145,9 +144,7 @@ const palestras = (await getCollection('palestras')).map((p) => p.data);
 
 		<div class="mt-10 md:mt-12">
 			<a
-				href={buildWhatsApp('Olá, gostaria de contratar uma palestra.')}
-				target="_blank"
-				rel="noopener noreferrer"
+				href="/palestras-recomecar"
 				class="inline-flex items-center justify-center gap-2 rounded-pill bg-accent px-8 py-3.5 text-sm font-bold text-petroleum-950 no-underline shadow-lg transition-colors hover:bg-accent-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:text-base"
 			>
 				<svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

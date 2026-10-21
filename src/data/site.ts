@@ -5,17 +5,16 @@ export function buildWhatsApp(message: string) {
 export const contactInfo = {
 	phone: '(11) 95305-4694',
 	phoneHref: buildWhatsApp('Olá, gostaria de mais informações.'),
-	email: 'contato@leonardoprecioso.com.br',
+	email: 'leonardo.precioso@recomecar360.org',
 	footerEmail: 'leonardo.precioso@recomecar360.org',
 	youtubeVideoId: 'S2nGFM1OJVk',
 } as const;
 
 export const footerNavLinks = [
 	{ href: '#sobre', label: 'Sobre' },
-	{ href: '#palestras', label: 'Palestras' },
+	{ href: '/palestras-recomecar', label: 'Palestras' },
 	{ href: '#instituto', label: 'Instituto Recomeçar' },
 	{ href: '#midia', label: 'Mídia' },
-	{ href: '/palestras-recomecar', label: 'Palestras Recomeçar' },
 	{ href: '/politica-de-cookies', label: 'Política de Cookies' },
 ] as const;
 

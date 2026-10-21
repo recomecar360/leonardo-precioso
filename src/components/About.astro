@@ -1,6 +1,6 @@
 ---
-import { Picture } from 'astro:assets';
-import aboutImage from '../assets/images/leonardo-sobre.png';
+import { Image } from 'astro:assets';
+import aboutImage from '../assets/images/leonardo-sobre.jpg';
 import { getCollection } from 'astro:content';
 
 const highlight = 'font-bold text-accent-ink';
@@ -30,15 +30,14 @@ const cards = (await getCollection('premios')).map((p) => p.data);
 		>
 			<figure class="order-2 lg:order-1">
 				<div class="overflow-hidden rounded-[2.5rem] shadow-[0_8px_30px_rgb(0_0_0/0.12)]">
-					<Picture
+					<Image
 						src={aboutImage}
-						alt="Leonardo Precioso — empreendedor social e fundador do Instituto Recomeçar"
-						formats={['avif','webp']}
-						widths={[320,480,640]}
-						sizes="(max-width: 768px) 100vw, 50vw"
-						width={640}
-						height={800}
-						class="aspect-[4/5] h-auto w-full object-cover"
+						alt="Leonardo Precioso, fundador do Instituto Recomeçar"
+						format="webp"
+						quality="mid"
+						width={682}
+						height={1024}
+						class="aspect-[4/5] h-auto w-full object-cover object-top"
 						loading="lazy"
 					/>
 				</div>
