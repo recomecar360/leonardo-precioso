@@ -1,13 +1,26 @@
 ---
 import { buildWhatsApp } from '../data/site';
 
-const navLinks = [
+const defaultNavLinks = [
 	{ href: '#sobre', label: 'Sobre' },
 	{ href: '#palestras', label: 'Palestras' },
 	{ href: '#instituto', label: 'Instituto' },
 	{ href: '#midia', label: 'Mídia' },
 	{ href: '#contato', label: 'Contato' },
 ] as const;
+
+interface Props {
+	navLinks?: ReadonlyArray<{ href: string; label: string }>;
+	logoHref?: string;
+}
+
+const isHome = Astro.url.pathname === '/';
+const navLinks = (Astro.props.navLinks ?? defaultNavLinks).map((link) => ({
+	...link,
+	href:
+		!Astro.props.navLinks && !isHome && link.href.startsWith('#') ? `/${link.href}` : link.href,
+}));
+const logoHref = Astro.props.logoHref ?? (isHome ? '#inicio' : '/');
 ---
 
 <header
@@ -18,7 +31,7 @@ const navLinks = [
 		class="mx-auto grid w-full max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 py-4 sm:px-6 md:grid-cols-[1fr_auto_1fr] lg:px-8"
 	>
 		<a
-			href="#inicio"
+			href={logoHref}
 			class="col-start-1 justify-self-start text-lg font-bold tracking-tight no-underline sm:text-xl"
 			aria-label="Leonardo Precioso — início"
 		>

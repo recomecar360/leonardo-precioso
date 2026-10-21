@@ -1,164 +1,418 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
-import { buildWhatsApp } from '../data/site';
+import fabioKapitanovas from '../assets/images/fabio-kapitanovas-face.jpg';
+import flavioDias from '../assets/images/flavio-dias-rosto.jpg';
+import gabrielConcon from '../assets/images/gabriel-concon.jpg';
+import gilbertoLopes from '../assets/images/gilberto-lopes.png';
+import josmarMachado from '../assets/images/josmar-machado-rosto.jpg';
+import leoPrecioso from '../assets/images/leo-precioso.jpg';
+import rudiFisher from '../assets/images/rudi-fisher.png';
+import sandraGioffi from '../assets/images/sandra-gioffi.png';
 
-const conselheiros = (await getCollection('conselheiros')).map((c) => c.data);
-const temas = (await getCollection('recomecarTemas')).map((t) => t.data);
-const pacotes = (await getCollection('recomecarPacotes')).map((p) => p.data);
-const beneficios = (await getCollection('recomecarBeneficios')).map((b) => b.data);
-const passos = (await getCollection('recomecarPassos')).map((s) => s.data);
-const impacto = (await getCollection('recomecarImpacto')).map((i) => i.data);
+const fotosConselheiros = {
+	'fabio-kapitanovas': fabioKapitanovas,
+	'flavio-dias': flavioDias,
+	'gabriel-concon': gabrielConcon,
+	'gilberto-lopes': gilbertoLopes,
+	'josmar-machado': josmarMachado,
+	'leo-precioso': leoPrecioso,
+	'rudi-fisher': rudiFisher,
+	'sandra-gioffi': sandraGioffi,
+} as const;
 
-const ctaNumber = '5511961485763';
+const enquadramento: Record<string, string> = {
+	'fabio-kapitanovas': 'object-center',
+	'flavio-dias': 'object-center',
+	'gabriel-concon': 'object-center',
+	'gilberto-lopes': 'object-[center_30%]',
+	'josmar-machado': 'object-center',
+	'leo-precioso': 'object-center',
+	'rudi-fisher': 'object-center',
+	'sandra-gioffi': 'object-center',
+};
+
+const byId = <T extends { id: string }>(items: T[]) =>
+	[...items].sort((a, b) => a.id.localeCompare(b.id, 'pt-BR', { numeric: true }));
+
+const conselheiros = byId(await getCollection('conselheiros')).map((c) => c.data);
+const temas = byId(await getCollection('recomecarTemas')).map((t) => t.data);
+const pacotes = byId(await getCollection('recomecarPacotes')).map((p) => p.data);
+const beneficios = byId(await getCollection('recomecarBeneficios')).map((b) => b.data);
+const passos = (await getCollection('recomecarPassos'))
+	.map((s) => s.data)
+	.sort((a, b) => a.step - b.step);
+const impacto = byId(await getCollection('recomecarImpacto')).map((i) => i.data);
+
 const ctaMessage = 'Olá, gostaria de contratar uma palestra/mentoria através do Instituto Recomeçar.';
-const ctaLink = `https://wa.me/${ctaNumber}?text=${encodeURIComponent(ctaMessage)}`;
+const ctaLink = `https://wa.me/5511961485763?text=${encodeURIComponent(ctaMessage)}`;
+const email = 'senna.ricarte@recomecar360.org';
+
+const navLinks = [
+	{ href: '/', label: 'Início' },
+	{ href: '#recomecar', label: 'Recomeçar' },
+	{ href: '#temas', label: 'Temas' },
+	{ href: '#conselheiros', label: 'Conselheiros' },
+	{ href: '#pacotes', label: 'Pacotes' },
+	{ href: '#contato-final', label: 'Contato' },
+];
+
+const modelo = [
+	{
+		step: '1',
+		title: 'Conselheiros como palestrantes',
+		text: 'Especialistas doam seu tempo e conhecimento para eventos e mentorias.',
+	},
+	{
+		step: '2',
+		title: 'Contratação pela empresa',
+		text: 'Escolha tema, palestrante e formato — nós cuidamos do resto.',
+	},
+	{
+		step: '3',
+		title: 'Valor revertido',
+		text: '100% do valor é destinado aos projetos e programas do Instituto.',
+	},
+];
 ---
 
 <Layout
-  title="Palestras & Mentorias Recomeçar — Inspiração que Transforma"
-  description="Contrate palestras e mentorias com executivos e especialistas. 100% da receita revertida para o Instituto Recomeçar."
+	title="Palestras & Mentorias Recomeçar — Inspiração que Transforma"
+	description="Contrate palestras e mentorias com executivos e especialistas. 100% da receita revertida para o Instituto Recomeçar."
 >
-  <section id="hero" class="w-full bg-petroleum-900 py-24">
-    <div class="mx-auto max-w-7xl px-4 text-center">
-      <h1 class="text-4xl font-bold text-white">Palestras & Mentorias Recomeçar</h1>
-      <p class="mt-4 text-lg text-white/90">Inspiração que transforma. 100% revertido para impacto social.</p>
-    </div>
-  </section>
+	<Header navLinks={navLinks} logoHref="/" />
 
-  <main class="mx-auto max-w-7xl px-4 py-16 space-y-20">
-    <!-- O Recomeçar -->
-    <section id="recomecar" class="bg-white" aria-labelledby="recomecar-title">
-      <h2 id="recomecar-title" class="text-2xl font-bold text-navy">O Recomeçar</h2>
-      <p class="mt-4 text-[#333]">O Instituto Recomeçar promove formação, reinserção e oportunidades de trabalho para pessoas em situação de vulnerabilidade, conectando conhecimento corporativo com impacto social.</p>
-      <dl class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {impacto.map((it) => (
-          <div class="rounded-lg bg-white p-6 text-center shadow">
-            <dt class="text-3xl font-bold text-accent-ink">{it.value}</dt>
-            <dd class="mt-2 text-sm text-[#555]">{it.label}</dd>
-          </div>
-        ))}
-      </dl>
-    </section>
+	<section
+		id="inicio"
+		class="relative w-full overflow-hidden bg-petroleum-900 py-20 sm:py-24 lg:py-32"
+		aria-labelledby="hero-title"
+	>
+		<div
+			class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(240,179,35,0.16),transparent_55%)]"
+			aria-hidden="true"
+		></div>
+		<div class="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl">
+				<p class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Instituto Recomeçar</p>
+				<h1
+					id="hero-title"
+					class="mt-5 text-hero-md font-bold leading-tight tracking-tight text-white sm:text-hero-lg lg:text-hero-xl"
+				>
+					Palestras & Mentorias <span class="text-accent">Recomeçar</span>
+				</h1>
+				<p class="mt-6 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
+					Inspiração que transforma. 100% do valor revertido para impacto social.
+				</p>
+				<div class="mt-8 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center">
+					<a href={ctaLink} target="_blank" rel="noopener noreferrer" class="btn-accent w-full sm:w-auto">
+						Contratar palestra
+					</a>
+					<a href="#pacotes" class="btn-outline-white w-full sm:w-auto">
+						Ver pacotes
+						<span aria-hidden="true">→</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    <!-- Unir conhecimento e impacto -->
-    <section id="modelo" class="bg-white" aria-labelledby="modelo-title">
-      <h2 id="modelo-title" class="text-2xl font-bold text-navy">Unir conhecimento e impacto</h2>
-      <p class="mt-4 text-[#333]">Executivos e especialistas doam sua experiência como conselheiros e palestrantes; empresas contratam eventos e mentorias, e todo valor é revertido para os projetos do Instituto Recomeçar.</p>
-    </section>
+	<main>
+		<section id="recomecar" class="w-full bg-white py-16 sm:py-20 lg:py-28" aria-labelledby="recomecar-title">
+			<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+				<header class="mx-auto max-w-3xl text-center">
+					<h2
+						id="recomecar-title"
+						class="text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.25rem]"
+					>
+						O Recomeçar
+					</h2>
+					<div class="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true"></div>
+					<p class="mt-6 text-base leading-relaxed text-[#333333] sm:text-lg">
+						O Instituto Recomeçar promove formação, reinserção e oportunidades de trabalho para
+						pessoas em situação de vulnerabilidade, conectando conhecimento corporativo com impacto
+						social.
+					</p>
+				</header>
 
-    <!-- Como funciona (3 itens) -->
-    <section id="como-funciona" class="bg-white" aria-labelledby="como-title">
-      <h2 id="como-title" class="text-2xl font-bold text-navy">Como funciona</h2>
-      <ol class="mt-6 space-y-4">
-        <li class="flex items-start gap-4">
-          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-petroleum-950 font-bold">1</span>
-          <div>
-            <h3 class="font-semibold text-navy">Conselheiros como palestrantes</h3>
-            <p class="text-sm text-[#444]">Especialistas doam seu tempo e conhecimento para eventos e mentorias.</p>
-          </div>
-        </li>
-        <li class="flex items-start gap-4">
-          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-petroleum-950 font-bold">2</span>
-          <div>
-            <h3 class="font-semibold text-navy">Contratação pela empresa</h3>
-            <p class="text-sm text-[#444]">Escolha tema, palestrante e formato — nós cuidamos do resto.</p>
-          </div>
-        </li>
-        <li class="flex items-start gap-4">
-          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-petroleum-950 font-bold">3</span>
-          <div>
-            <h3 class="font-semibold text-navy">Valor revertido</h3>
-            <p class="text-sm text-[#444]">100% do valor é destinado aos projetos e programas do Instituto.</p>
-          </div>
-        </li>
-      </ol>
-    </section>
+				<div class="mt-12 rounded-2xl bg-navy px-6 py-10 sm:mt-14 sm:rounded-3xl sm:px-10 sm:py-12">
+					<h3 class="text-center text-xl font-bold text-white sm:text-2xl">Nosso impacto</h3>
+					<dl class="mt-8 grid gap-8 sm:grid-cols-3 sm:gap-10">
+						{
+							impacto.map((item) => (
+								<div class="text-center">
+									<dt class="text-3xl font-bold text-accent sm:text-4xl">{item.value}</dt>
+									<dd class="mt-2 text-sm leading-relaxed text-white/90 sm:text-base">{item.label}</dd>
+								</div>
+							))
+						}
+					</dl>
+				</div>
+			</div>
+		</section>
 
-    <!-- Temas -->
-    <section id="temas" class="bg-white" aria-labelledby="temas-title">
-      <h2 id="temas-title" class="text-2xl font-bold text-navy">Temas</h2>
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {temas.map((t) => (
-          <div class="rounded-lg border p-4 bg-white">
-            <h3 class="font-semibold text-navy">{t.title}</h3>
-          </div>
-        ))}
-      </div>
-    </section>
+		<section id="modelo" class="w-full bg-petroleum-900 py-16 sm:py-20 lg:py-28" aria-labelledby="modelo-title">
+			<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+				<header class="mx-auto max-w-3xl text-center">
+					<h2
+						id="modelo-title"
+						class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-[2.25rem]"
+					>
+						Unir conhecimento e impacto
+					</h2>
+					<div class="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true"></div>
+					<p class="mt-6 text-base leading-relaxed text-white/85 sm:text-lg">
+						Executivos e especialistas doam sua experiência como conselheiros e palestrantes;
+						empresas contratam eventos e mentorias, e todo valor é revertido para os projetos do
+						Instituto Recomeçar.
+					</p>
+				</header>
 
-    <!-- Conselheiros -->
-    <section id="conselheiros" class="bg-white" aria-labelledby="conselheiros-title">
-      <h2 id="conselheiros-title" class="text-2xl font-bold text-navy">Conselheiros</h2>
-      <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-        {conselheiros.map((c) => {
-          const initials = c.name.split(' ').map(s=>s[0]).join('').slice(0,2).toUpperCase();
-          return (
-            <article class="rounded-lg bg-white p-4 text-center">
-              <div class="mx-auto h-16 w-16 rounded-full bg-accent flex items-center justify-center text-navy font-bold text-xl">{initials}</div>
-              <h3 class="mt-3 font-semibold text-navy">{c.name}</h3>
-              <p class="text-sm text-[#555]">{c.role}</p>
-              <p class="mt-2"><a href={c.linkedin} target="_blank" rel="noopener noreferrer" class="text-accent-ink underline">LinkedIn</a></p>
-            </article>
-          );
-        })}
-      </div>
-    </section>
+				<ol id="como-funciona" class="mt-12 grid gap-6 sm:mt-14 md:grid-cols-3 lg:mt-16 lg:gap-8">
+					{
+						modelo.map((item) => (
+							<li class="flex flex-col rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgb(0_0_0/0.15)] sm:rounded-3xl sm:p-8">
+								<span class="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-lg font-bold text-petroleum-950">
+									{item.step}
+								</span>
+								<h3 class="mt-5 text-lg font-bold leading-snug text-navy sm:text-xl">{item.title}</h3>
+								<p class="mt-3 text-sm leading-relaxed text-[#4a5568] sm:text-[0.9375rem]">{item.text}</p>
+							</li>
+						))
+					}
+				</ol>
+			</div>
+		</section>
 
-    <!-- Como contratar (passos) -->
-    <section id="contratar" class="bg-white" aria-labelledby="contratar-title">
-      <h2 id="contratar-title" class="text-2xl font-bold text-navy">Como contratar</h2>
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {passos.map((p) => (
-          <div class="rounded-lg bg-white p-4 text-center">
-            <div class="mx-auto h-10 w-10 rounded-full bg-accent flex items-center justify-center font-bold text-petroleum-950">{p.step}</div>
-            <h3 class="mt-3 font-semibold text-navy">{p.title}</h3>
-            {p.detail ? <p class="text-sm text-[#555] mt-2">{p.detail}</p> : null}
-          </div>
-        ))}
-      </div>
-    </section>
+		<section id="temas" class="w-full bg-[#f5f7fa] py-16 sm:py-20 lg:py-28" aria-labelledby="temas-title">
+			<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+				<header class="mx-auto max-w-3xl text-center">
+					<h2 id="temas-title" class="text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.25rem]">
+						Temas
+					</h2>
+					<div class="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true"></div>
+					<p class="mt-6 text-base text-[#666666] sm:text-lg">
+						Conteúdos para liderança, cultura e transformação nas empresas
+					</p>
+				</header>
 
-    <!-- Pacotes -->
-    <section id="pacotes" class="bg-white" aria-labelledby="pacotes-title">
-      <h2 id="pacotes-title" class="text-2xl font-bold text-navy">Pacotes e investimento</h2>
-      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {pacotes.map((pkg) => (
-          <article class="rounded-lg bg-white p-6">
-            <h3 class="text-xl font-bold text-navy">{pkg.title}</h3>
-            <p class="text-sm text-[#444]">{pkg.format}</p>
-            <ul class="mt-4 list-disc pl-5 space-y-2 text-sm text-[#333]">
-              {pkg.items.map(i => <li>{i}</li>)}
-            </ul>
-            <div class="mt-4">
-              <div class="text-2xl font-bold text-accent-ink">{pkg.price}</div>
-              <a href={`https://wa.me/5511961485763?text=${encodeURIComponent('Olá, gostaria de contratar uma palestra/mentoria através do Instituto Recomeçar.')}`} target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 rounded-pill bg-accent px-4 py-2 text-sm font-bold text-petroleum-950">Contratar</a>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+				<ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-5">
+					{
+						temas.map((tema) => (
+							<li class="rounded-2xl border border-black/5 bg-white px-5 py-5 shadow-[0_4px_16px_rgb(0_0_0/0.06)] sm:px-6">
+								<h3 class="text-base font-bold leading-snug text-navy sm:text-lg">{tema.title}</h3>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</section>
 
-    <!-- Benefícios -->
-    <section id="beneficios" class="bg-white" aria-labelledby="beneficios-title">
-      <h2 id="beneficios-title" class="text-2xl font-bold text-navy">Benefícios para empresas</h2>
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {beneficios.map(b => (
-          <article class="rounded-lg bg-white p-6 text-center">
-            <h3 class="font-semibold text-navy">{b.title}</h3>
-            <p class="text-sm text-[#444] mt-2">{b.description}</p>
-          </article>
-        ))}
-      </div>
-    </section>
+		<section
+			id="conselheiros"
+			class="w-full bg-petroleum-900 py-16 sm:py-20 lg:py-28"
+			aria-labelledby="conselheiros-title"
+		>
+			<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+				<header class="mx-auto max-w-3xl text-center">
+					<h2
+						id="conselheiros-title"
+						class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-[2.25rem]"
+					>
+						Conselheiros
+					</h2>
+					<div class="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true"></div>
+					<p class="mt-6 text-base text-white/85 sm:text-lg">
+						Executivos e especialistas que doam experiência para gerar impacto
+					</p>
+				</header>
 
-    <!-- Contato final -->
-    <section id="contato-final" class="bg-white" aria-labelledby="contato-final-title">
-      <h2 id="contato-final-title" class="text-2xl font-bold text-navy">Contato</h2>
-      <p class="mt-4 text-[#333]">Para contratar: <a href="https://wa.me/5511961485763" target="_blank" rel="noopener noreferrer" class="text-accent-ink underline">WhatsApp</a> ou <a href="mailto:senna.ricarte@recomecar360.org" class="text-accent-ink underline">senna.ricarte@recomecar360.org</a></p>
-    </section>
+				<ul class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-8">
+					{
+						conselheiros.map((conselheiro) => {
+							const initials = conselheiro.name
+								.split(' ')
+								.map((part) => part[0])
+								.join('')
+								.slice(0, 2)
+								.toUpperCase();
+							return (
+								<li class="rounded-2xl bg-white p-6 text-center shadow-[0_8px_30px_rgb(0_0_0/0.15)] sm:rounded-3xl sm:p-8">
+									{conselheiro.photo && conselheiro.photo in fotosConselheiros ? (
+										<Image
+											src={fotosConselheiros[conselheiro.photo as keyof typeof fotosConselheiros]}
+											alt={`${conselheiro.name}, ${conselheiro.role}`}
+											format="webp"
+											quality="mid"
+											width={384}
+											height={384}
+											class:list={[
+												'mx-auto h-48 w-48 rounded-full object-cover',
+												conselheiro.photo
+													? (enquadramento[conselheiro.photo] ?? 'object-[center_18%]')
+													: 'object-[center_18%]',
+											]}
+											loading="lazy"
+										/>
+									) : (
+										<div
+											class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-xl font-bold text-petroleum-950"
+											aria-hidden="true"
+										>
+											{initials}
+										</div>
+									)}
+									<h3 class="mt-4 text-lg font-bold text-navy">{conselheiro.name}</h3>
+									<p class="mt-1 text-sm leading-relaxed text-[#555555]">{conselheiro.role}</p>
+									<a
+										href={conselheiro.linkedin}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="mt-4 inline-flex text-sm font-semibold text-accent-ink no-underline transition-colors hover:text-navy"
+										aria-label={`LinkedIn de ${conselheiro.name}`}
+									>
+										LinkedIn
+									</a>
+								</li>
+							);
+						})
+					}
+				</ul>
+			</div>
+		</section>
 
-  </main>
+		<section id="contratar" class="w-full bg-white py-16 sm:py-20 lg:py-28" aria-labelledby="contratar-title">
+			<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+				<header class="mx-auto max-w-3xl text-center">
+					<h2
+						id="contratar-title"
+						class="text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.25rem]"
+					>
+						Como contratar
+					</h2>
+					<div class="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true"></div>
+				</header>
 
-  </Layout>
+				<ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-8">
+					{
+						passos.map((passo) => (
+							<li class="rounded-2xl bg-[#f8f9fa] p-6 text-center sm:p-7">
+								<span class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-accent text-lg font-bold text-petroleum-950">
+									{passo.step}
+								</span>
+								<h3 class="mt-4 font-bold leading-snug text-navy">{passo.title}</h3>
+								{passo.detail ? (
+									<p class="mt-2 text-sm leading-relaxed text-[#555555]">{passo.detail}</p>
+								) : null}
+							</li>
+						))
+					}
+				</ol>
+			</div>
+		</section>
 
+		<section id="pacotes" class="w-full bg-petroleum-900 py-16 sm:py-20 lg:py-28" aria-labelledby="pacotes-title">
+			<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+				<header class="mx-auto max-w-3xl text-center">
+					<h2
+						id="pacotes-title"
+						class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-[2.25rem]"
+					>
+						Pacotes e investimento
+					</h2>
+					<div class="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true"></div>
+				</header>
+
+				<div class="mt-12 grid gap-6 md:grid-cols-2 lg:mt-14 lg:gap-8">
+					{
+						pacotes.map((pacote) => (
+							<article class="flex flex-col rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgb(0_0_0/0.15)] sm:rounded-3xl sm:p-8">
+								<p class="text-xs font-bold uppercase tracking-[0.2em] text-accent-ink">{pacote.format}</p>
+								<h3 class="mt-2 text-2xl font-bold text-navy">{pacote.title}</h3>
+								<ul class="mt-6 flex-1 space-y-3">
+									{pacote.items.map((item) => (
+										<li class="flex gap-3 text-sm leading-relaxed text-[#333333] sm:text-[0.9375rem]">
+											<span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+											{item}
+										</li>
+									))}
+								</ul>
+								<p class="mt-8 text-3xl font-bold tracking-tight text-navy">{pacote.price}</p>
+								<a
+									href={ctaLink}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="btn-accent mt-6 w-full"
+								>
+									Contratar
+								</a>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section id="beneficios" class="w-full bg-white py-16 sm:py-20 lg:py-28" aria-labelledby="beneficios-title">
+			<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+				<header class="mx-auto max-w-3xl text-center">
+					<h2
+						id="beneficios-title"
+						class="text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.25rem]"
+					>
+						Benefícios para empresas
+					</h2>
+					<div class="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true"></div>
+				</header>
+
+				<div class="mt-12 grid gap-6 md:grid-cols-3 lg:mt-14 lg:gap-8">
+					{
+						beneficios.map((beneficio) => (
+							<article class="rounded-2xl bg-[#f8f9fa] p-6 sm:p-8">
+								<div class="mb-4 h-1 w-10 rounded-full bg-accent" aria-hidden="true"></div>
+								<h3 class="text-lg font-bold text-navy sm:text-xl">{beneficio.title}</h3>
+								<p class="mt-3 text-sm leading-relaxed text-[#555555] sm:text-[0.9375rem]">
+									{beneficio.description}
+								</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section
+			id="contato-final"
+			class="w-full bg-petroleum-900 py-16 sm:py-20 lg:py-28"
+			aria-labelledby="contato-final-title"
+		>
+			<div class="mx-auto w-full max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+				<h2
+					id="contato-final-title"
+					class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.25rem]"
+				>
+					Entre em contato
+				</h2>
+				<div class="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true"></div>
+				<p class="mt-6 text-base leading-relaxed text-white/85 sm:text-lg">
+					Pronto para levar uma palestra ou mentoria Recomeçar para a sua empresa?
+				</p>
+				<div class="mt-8 flex flex-col items-center gap-4 sm:mt-10">
+					<a href={ctaLink} target="_blank" rel="noopener noreferrer" class="btn-accent w-full sm:w-auto">
+						Falar no WhatsApp
+					</a>
+					<a
+						href={`mailto:${email}`}
+						class="text-sm font-medium text-white/80 no-underline transition-colors hover:text-accent sm:text-base"
+					>
+						{email}
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>

@@ -2,6 +2,8 @@
 import { contactInfo, footerNavLinks, socialLinks, buildWhatsApp } from '../data/site';
 
 const year = new Date().getFullYear();
+const onHome = Astro.url.pathname === '/';
+const hrefFor = (href: string) => (href.startsWith('#') && !onHome ? `/${href}` : href);
 
 const footerSocialLinks = socialLinks.filter((s) => s.icon !== 'youtube');
 ---
@@ -30,7 +32,7 @@ const footerSocialLinks = socialLinks.filter((s) => s.icon !== 'youtube');
 							footerNavLinks.map((link) => (
 								<li>
 									<a
-										href={link.href}
+										href={hrefFor(link.href)}
 										class="text-sm text-white/70 no-underline transition-colors hover:text-accent"
 									>
 										{link.label}
